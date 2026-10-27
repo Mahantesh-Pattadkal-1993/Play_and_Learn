@@ -66,7 +66,8 @@ npm run start
 - **Interactive Code Runner** — Write TypeScript in Monaco, transpile with Sucrase, execute in a sandboxed iframe with a **simulated Playwright API** (`page`, `expect`, `test`, `request`, `chromium`, `devices`, `defineConfig`) so automation code runs without a real browser
 - **Code Draft Restore** — Saved drafts are reloaded automatically when a lesson is reopened
 - **Visual Diagrams** — Mermaid.js flowcharts rendered for every lesson
-- **Real-World Analogies** — Every lesson uses a relatable analogy to explain concepts
+- **Concept + Analogy** — Every lesson first explains what the topic *is*, then reinforces it with a relatable analogy
+- **Annotated, Highlighted Code** — TypeScript examples are syntax coloured (keywords, `async`/`await`, `Promise`, Playwright APIs), commented line by line, and followed by a "how this code explains the theme" walkthrough
 - **Instant Quiz Feedback** — Multiple-choice quizzes with explanations
 - **Progress Tracking** — Progress bars per module and overall
 - **Code Draft Saving** — Per-user draft persistence in localStorage

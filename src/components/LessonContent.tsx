@@ -6,6 +6,8 @@ import { CURRICULUM, getLesson } from "@/lib/curriculum";
 import MermaidDiagram from "@/components/MermaidDiagram";
 import Quiz from "@/components/Quiz";
 import CodeRunner from "@/components/CodeRunner";
+import CodeBlock from "@/components/CodeBlock";
+import { getLessonNotes } from "@/lib/lessonNotes";
 import { useUserContext } from "@/components/UserContext";
 import Link from "next/link";
 
@@ -24,6 +26,7 @@ export default function LessonContent({ lessonId }: LessonContentProps) {
     userId,
   } = useUserContext();
   const lesson = getLesson(lessonId);
+  const notes = getLessonNotes(lessonId);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [quizScore, setQuizScoreState] = useState<number | null>(null);
 
@@ -141,13 +144,28 @@ export default function LessonContent({ lessonId }: LessonContentProps) {
           )}
         </div>
 
-        {/* Analogy Section */}
-        <div className="mb-10 p-6 bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl border border-slate-700">
-          <div className="flex items-start gap-4">
-            <span className="text-4xl flex-shrink-0">{lesson.analogy.visual}</span>
-            <div>
-              <h2 className="text-xl font-semibold text-white mb-2">{lesson.analogy.title}</h2>
-              <p className="text-slate-300 leading-relaxed">{lesson.analogy.description}</p>
+        {/* Concept Section — what the topic actually is */}
+        <div className="mb-6 p-6 bg-slate-800/40 rounded-xl border border-indigo-500/30">
+          <h2 className="text-xl font-semibold text-white mb-3 flex items-center gap-2">
+            <span>🧠</span> What is {lesson.title}?
+          </h2>
+          <p className="text-slate-300 leading-relaxed">
+            {notes?.concept ?? lesson.description}
+          </p>
+        </div>
+
+        {/* Analogy Section — a friendly mental model for the concept */}
+        <div className="mb-10">
+          <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+            <span>🧩</span> Analogy
+          </h2>
+          <div className="p-6 bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl border border-slate-700">
+            <div className="flex items-start gap-4">
+              <span className="text-4xl flex-shrink-0">{lesson.analogy.visual}</span>
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-2">{lesson.analogy.title}</h3>
+                <p className="text-slate-300 leading-relaxed">{lesson.analogy.description}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -168,11 +186,21 @@ export default function LessonContent({ lessonId }: LessonContentProps) {
             <span>💻</span> Step-by-Step Code Example
           </h2>
           <p className="text-slate-300 mb-4">{lesson.codeExample.description}</p>
-          <div className="bg-slate-950 border border-slate-700 rounded-lg overflow-hidden">
-            <pre className="p-4 overflow-x-auto text-sm font-mono text-slate-300">
-              <code>{lesson.codeExample.code}</code>
-            </pre>
-          </div>
+          <CodeBlock
+            code={lesson.codeExample.code}
+            annotations={notes?.annotations}
+            filename="example.ts"
+          />
+          {notes?.codeExplanation && (
+            <div className="mt-4 p-4 bg-slate-800/40 border border-slate-700 rounded-lg">
+              <h3 className="text-sm font-semibold text-slate-200 mb-2 flex items-center gap-2">
+                <span>🔎</span> How this code explains the topic
+              </h3>
+              <p className="text-sm text-slate-300 leading-relaxed">
+                {notes.codeExplanation}
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Quiz Section */}

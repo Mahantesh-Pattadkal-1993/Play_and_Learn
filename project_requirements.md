@@ -50,15 +50,17 @@ The goal of this project is to build an interactive, web-based learning platform
 > **Rule:** Every module contains a maximum of **5 lessons**.
 > **Lesson Structure:**
 >
-> 1. Concept & Beginner-Friendly Analogy
+> 1. Concept Explanation (a plain-language description of what the topic is)
 >
-> 2. Visual Diagram / Workflow
+> 2. Beginner-Friendly Analogy (a mental model that makes the concept stick)
 >
-> 3. Step-by-Step Code Example (TypeScript + Playwright)
+> 3. Visual Diagram / Workflow
 >
-> 4. Quick Quiz (2–3 questions)
+> 4. Annotated Code Example — TypeScript/Playwright syntax highlighted (keywords, `async`/`await`, `Promise`, Playwright APIs), with inline comments and a "how this code explains the topic" walkthrough
 >
-> 5. Interactive Coding Task (In-Browser Editor)
+> 5. Quick Quiz (2–3 questions)
+>
+> 6. Interactive Coding Task (In-Browser Editor)
 
 ### Module 1: TypeScript Foundations for Beginners
 
